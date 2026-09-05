@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Acerca de</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="about-shell">
+    <div class="brand-badge">UC</div>
+    <h1>{{ nombreApp }}</h1>
+    <p class="subtitle">{{ descripcion }}</p>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información del curso</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Universidad:</strong> {{ universidad }}</p>
+        <p><strong>Actividad:</strong> {{ actividad }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Integrantes del equipo</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul>
+          @for (integrante of integrantes; track integrante) {
+            <li>{{ integrante }}</li>
+          }
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Tecnologías usadas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul>
+          @for (tecnologia of tecnologias; track tecnologia) {
+            <li>{{ tecnologia }}</li>
+          }
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Versión</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ appVersion }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

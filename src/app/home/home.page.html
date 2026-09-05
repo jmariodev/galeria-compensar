@@ -18,6 +18,10 @@
       </div>
     </ion-title>
     <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/acerca-de">
+        <ion-icon slot="start" name="informationCircle"></ion-icon>
+        Acerca de
+      </ion-button>
       <ion-button (click)="enterSelectionMode()" [disabled]="photoService.photos().length === 0"> Seleccionar </ion-button>
     </ion-buttons>
     }

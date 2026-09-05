@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, signal, computed, ViewChild, ElementRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -23,7 +24,7 @@ import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { addIcons } from 'ionicons';
-import { camera, trash, close, share, images, checkmarkCircle } from 'ionicons/icons';
+import { camera, trash, close, share, images, checkmarkCircle, informationCircle } from 'ionicons/icons';
 import type { UserPhoto } from '../services/photo.service';
 import { PhotoService } from '../services/photo.service';
 
@@ -46,6 +47,7 @@ import { PhotoService } from '../services/photo.service';
     IonButtons,
     IonButton,
     DatePipe,
+    RouterLink,
   ],
 })
 export class HomePage implements OnInit {
@@ -73,7 +75,7 @@ export class HomePage implements OnInit {
   private dismissGesture?: Gesture;
 
   constructor() {
-    addIcons({ camera, trash, close, share, images, checkmarkCircle });
+    addIcons({ camera, trash, close, share, images, checkmarkCircle, informationCircle });
   }
 
   async ngOnInit() {
