@@ -1,0 +1,49 @@
+/*
+ * CSS Global de la App
+ * ----------------------------------------------------------------------------
+ * Coloca aquí las reglas de estilo que quieras aplicar globalmente. Estos estilos son
+ * para toda la app y no solo para un componente. Además, este archivo puede
+ * usarse como punto de entrada para importar otros archivos CSS/Sass que se incluirán
+ * en el CSS de salida.
+ * Para más información sobre hojas de estilo globales, visita la documentación:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* CSS base requerido para que los componentes de Ionic funcionen correctamente */
+@import "@ionic/angular/css/core.css";
+
+/* CSS básico para apps construidas con Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Utilidades CSS opcionales que se pueden comentar */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Modo Oscuro de Ionic
+ * -----------------------------------------------------
+ * Para más información, consulta:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+.photo-viewer-modal {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
+
+ion-button {
+  text-transform: none;
+  --box-shadow: none;
+  font-weight: 500;
+}

@@ -1,0 +1,21 @@
+// Para información sobre cómo crear tu propio tema, consulta:
+// https://ionicframework.com/docs/theming/
+
+:root {
+  /** primary — naranja institucional UCompensar **/
+  --ion-color-primary: #ff6600;
+  --ion-color-primary-rgb: 255, 102, 0;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #e05a00;
+  --ion-color-primary-tint: #ff751a;
+}
+
+.ion-color-primary {
+  --ion-color-base: var(--ion-color-primary);
+  --ion-color-base-rgb: var(--ion-color-primary-rgb);
+  --ion-color-contrast: var(--ion-color-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-primary-shade);
+  --ion-color-tint: var(--ion-color-primary-tint);
+}

@@ -1,0 +1,7 @@
+{
+  "name": "GaleriaCompensar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    @if (selectionMode()) {
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelSelectionMode()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title class="selection-title">{{ selectedCount() }} seleccionadas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" [disabled]="selectedCount() === 0" (click)="confirmDeleteSelected()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    } @else {
+    <ion-title>
+      <div class="brand">
+        <span class="brand-badge">UC</span>
+        <span class="brand-name">GaleriaCompensar</span>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="enterSelectionMode()" [disabled]="photoService.photos().length === 0"> Seleccionar </ion-button>
+    </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (!selectionMode()) {
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        <div class="brand-large">GaleriaCompensar</div>
+        @if (photoService.photos().length > 0) {
+        <div class="brand-subtitle">{{ photoService.photos().length }} fotos</div>
+        }
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  }
+
+  @if (photoService.photos().length === 0) {
+  <div class="empty-state">
+    <ion-icon name="images"></ion-icon>
+    <h2>Aún no tienes fotos</h2>
+    <p>Toca el botón de cámara para tomar tu primera foto</p>
+  </div>
+  } @else {
+  <ion-grid>
+    <ion-row>
+      @for (photo of photoService.photos(); track photo.filepath; let position = $index) {
+      <ion-col size="4">
+        <button class="photo-thumb" [class.is-selected]="isSelected(photo)" (click)="onThumbnailTap(photo, position)">
+          <img [src]="photo.webviewPath" [attr.alt]="'Foto ' + (position + 1)" loading="lazy" />
+          @if (selectionMode()) {
+          @if (isSelected(photo)) {
+          <ion-icon class="select-mark select-mark-active" name="checkmarkCircle"></ion-icon>
+          } @else {
+          <span class="select-mark select-mark-empty"></span>
+          } }
+        </button>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+  }
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-modal
+  class="photo-viewer-modal"
+  [isOpen]="selectedIndex() !== null"
+  (ionModalDidPresent)="onViewerPresented()"
+  (ionModalWillDismiss)="onViewerDismissed()"
+>
+  <ng-template>
+    <div #viewerRoot class="viewer-root">
+      <ion-header>
+        <ion-toolbar color="dark">
+          <ion-buttons slot="start">
+            <ion-button (click)="closePhoto()">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="shareCurrentPhoto()">
+              <ion-icon slot="icon-only" name="share"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="deleteCurrentPhoto()">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [scrollY]="false" class="photo-viewer-content">
+        <div #slidesContainer class="slides-container" (scroll)="onSlidesScroll(slidesContainer)">
+          @for (photo of photoService.photos(); track photo.filepath; let position = $index) {
+          <div class="slide">
+            <img [src]="photo.webviewPath" [attr.alt]="'Foto ' + (position + 1)" class="full-photo" />
+          </div>
+          }
+        </div>
+        @if (selectedPhoto(); as sel) {
+        <div class="viewer-caption">{{ sel.createdAt | date: "d 'de' MMMM 'de' y · h:mm a" }}</div>
+        }
+      </ion-content>
+    </div>
+  </ng-template>
+</ion-modal>
